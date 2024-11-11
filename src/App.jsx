@@ -1,14 +1,14 @@
 import Header from "./components/Header"
-import Input from "./components/Input"
 import Top from "./components/Top"
 import Screen from "./Layout/Screen"
+import Content from "./components/Content"
 
 const App = () => {
   return (
     <Screen>
       <Top />
       <Header />
-      <Input />
+      <Content />
     </Screen>
   )
 }
