@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         bricolage: ["Bricolage Grotesque", "sans-serif"],
+        popins: ["Poppins", "serif"],
       },
       colors: {
         pur: "#804B71",
