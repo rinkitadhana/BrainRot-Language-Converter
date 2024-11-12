@@ -13,7 +13,7 @@ const Header = () => {
           <h1 className=" md:text-6xl text-4xl font-bricolage font-semibold text-neon ">
             Brain-Rot <span className="text-pur">Language</span> Converter
           </h1>
-          <p className=" text-lg font-popins text-center text-neon">
+          <p className=" text-lg font-popins text-center text-zinc-300">
             Turn your text into trendy Gen Z slang with a click. Add memes,
             slang, and cool vibes instantly!👀
           </p>
