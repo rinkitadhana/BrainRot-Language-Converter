@@ -4,79 +4,91 @@ const Content = () => {
   const [inputText, setInputText] = useState("")
   const [outputText, setOutputText] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [currentKeyIndex, setCurrentKeyIndex] = useState(0)
+  const [error, setError] = useState("")
   const API_KEYS = [
     import.meta.env.VITE_APP_GEMINI_API_KEY,
     import.meta.env.VITE_APP_GEMINI_API_KEY_2,
     import.meta.env.VITE_APP_GEMINI_API_KEY_3,
-    import.meta.env.VITE_APP_GEMINI_API_KEY_4
-  ];
-  const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
-  const [error, setError] = useState("")
+    import.meta.env.VITE_APP_GEMINI_API_KEY_4,
+  ]
+
   const prompt =
     "You are a language converter that transforms normal text into ULTRA brain rot Gen Z speak. KEEP IT SHORT - match input length! Convert the input directly, don't add explanations. Use max cringe: skibidi, bussin, fr fr, nah bc, based, no cap, slay, literally me, real, valid, sus, chad, ratio, W/L, HELP-, /srs, /j. Add little emojis and keyboard smashing (PLSSS) and excessive punctuation!!! Make it sound unhinged but BRIEF. Remember, you're CONVERTING language, not explaining or expanding."
 
   const handleGenerate = async () => {
     if (!inputText.trim()) {
-      setError("Please provide some text to convert.");
-      return;
+      setError("Please provide some text to convert.")
+      return
     }
 
-    setIsLoading(true);
-    setError("");
-    setOutputText("");
+    setIsLoading(true)
+    setError("")
+    setOutputText("")
 
-    let apiKeyExhausted = true;
-    let attempts = 0;
+    let apiKeyExhausted = true
+    let attempts = 0
 
     while (apiKeyExhausted && attempts < API_KEYS.length) {
       try {
-        const response = await fetch(`${import.meta.env.VITE_APP_GEMINI_API_ENDPOINT}?key=${API_KEYS[currentKeyIndex]}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: `${prompt}\n${inputText}`
-              }]
-            }]
-          }),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_APP_GEMINI_API_ENDPOINT}?key=${
+            API_KEYS[currentKeyIndex]
+          }`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [
+                    {
+                      text: `${prompt}\n${inputText}`,
+                    },
+                  ],
+                },
+              ],
+            }),
+          }
+        )
 
         if (response.status === 403) {
-          setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % API_KEYS.length);
-          attempts++;
+          setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % API_KEYS.length)
+          attempts++
         } else if (!response.ok) {
-          setError("Failed to generate text, please try again.");
-          throw new Error(`HTTP error! status: ${response.status}`);
+          setError("Failed to generate text, please try again.")
+          throw new Error(`HTTP error! status: ${response.status}`)
         } else {
-          apiKeyExhausted = false;
-          const data = await response.json();
+          apiKeyExhausted = false
+          const data = await response.json()
           if (data.candidates && data.candidates.length > 0) {
-            setOutputText(data.candidates[0].content.parts.map(part => part.text).join(''));
+            setOutputText(
+              data.candidates[0].content.parts.map((part) => part.text).join("")
+            )
           } else {
-            setError("No text was generated.");
+            setError("No text was generated.")
           }
         }
       } catch (err) {
-        setError(`Error: ${err.message}`);
-        console.error("Error:", err);
-        apiKeyExhausted = false; 
+        setError(`Error: ${err.message}`)
+        console.error("Error:", err)
+        apiKeyExhausted = false
       }
     }
 
     if (attempts === API_KEYS.length) {
-      setError("All API keys have been exhausted. Please try again later.");
+      setError("All API keys have been exhausted. Please try again later.")
     }
 
-    setIsLoading(false);
+    setIsLoading(false)
   }
 
   const formatText = (text) => {
-    text = text.replace(/<\/?i>/g, '');
-    return text.replace(/\*\*/g, '');
-  };
+    text = text.replace(/<\/?i>/g, "")
+    return text.replace(/\*\*/g, "")
+  }
 
   return (
     <section className="flex flex-col gap-4 mt-6 px-3 md:px-0">
