@@ -6,7 +6,7 @@ const Content = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const prompt =
-    "Take this input text and transform it into peak Gen Z brain rot language. Use a mix of trending slang, chaotic internet culture references, and absurd humor. Incorporate words like sigma, Ohio, skibidi, rizz, sus, NPC, and giga chad. Add random Gen Z humor like ratio and meme catchphrases to make the output feel like it was straight from a chaotic TikTok comment section. Maintain the general meaning of the original text but deliver it with maximum absurdity."
+    "Transform this text into ULTRA brain rot Gen Z speak. KEEP IT SHORT - match input length! Use max cringe: skibidi, bussin, fr fr, nah bc, based, no cap, slay, literally me, real, valid, sus, chad, ratio, W/L, HELP-, /srs, /j. Add emojis (💀😭✨️🔥) and keyboard smashing (PLSSS). Make it sound unhinged but KEEP IT BRIEF! Don't add extra context or explanations - just convert the input directly into brain rot speak."
 
   const handleGenerate = async () => {
     if (!inputText.trim()) {
@@ -83,7 +83,14 @@ const Content = () => {
           </h1>
         </div>
       )}
-      {outputText && formatText(outputText)}
+      {outputText && (
+        <div className="flex flex-col gap-4">
+          <h2 className="text-xl font-medium">Text Generated 👇</h2>
+          <div className="w-full min-h-[50px] bg-zinc-800 p-3 rounded-md border-2 border-pur">
+            {formatText(outputText)}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
