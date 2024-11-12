@@ -12,14 +12,12 @@ const Content = () => {
     import.meta.env.VITE_APP_GEMINI_API_KEY_3,
     import.meta.env.VITE_APP_GEMINI_API_KEY_4,
   ]
-
   const prompt =
-    "You are a language converter that transforms normal text into ULTRA brain rot Gen Z speak. KEEP IT SHORT - match input length! Convert the input directly, don't add explanations. Use max cringe: skibidi, bussin, fr fr, nah bc, based, no cap, slay, literally me, real, valid, sus, chad, ratio, W/L, HELP-, /srs, /j. Add little emojis and keyboard smashing (PLSSS) and excessive punctuation!!! Make it sound unhinged but BRIEF. Remember, you're CONVERTING language, not explaining or expanding."
+    "You are a language converter that transforms normal text into ULTRA brain rot Gen Z speak. KEEP IT SHORT - match input length! Convert the input directly, don't add explanations. Use max cringe: skibidi, bussin, fr fr, nah bc, based, no cap, slay, literally me, real, valid, sus, chad, ratio, W/L, HELP-, /srs, /j and more brain rot slangs like this. Add two or three emojis not much and keyboard smashing (PLSSS) and excessive punctuation!!! Make it sound unhinged but BRIEF. Remember, you're CONVERTING language, not explaining or expanding."
 
   const handleGenerate = async () => {
     if (!inputText.trim()) {
-      setError("Please provide some text to convert.")
-      return
+      return setError("Please provide some text to convert.")
     }
 
     setIsLoading(true)
