@@ -4,6 +4,13 @@ const Content = () => {
   const [inputText, setInputText] = useState("")
   const [outputText, setOutputText] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const API_KEYS = [
+    import.meta.env.VITE_APP_GEMINI_API_KEY,
+    import.meta.env.VITE_APP_GEMINI_API_KEY_2,
+    import.meta.env.VITE_APP_GEMINI_API_KEY_3,
+    import.meta.env.VITE_APP_GEMINI_API_KEY_4
+  ];
+  const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
   const [error, setError] = useState("")
   const prompt =
     "Transform this text into ULTRA brain rot Gen Z speak. KEEP IT SHORT - match input length! Use max cringe: skibidi, bussin, fr fr, nah bc, based, no cap, slay, literally me, real, valid, sus, chad, ratio, W/L, HELP-, /srs, /j. Add emojis (💀😭✨️🔥) and keyboard smashing (PLSSS). Make it sound unhinged but KEEP IT BRIEF! Don't add extra context or explanations - just convert the input directly into brain rot speak."
@@ -18,38 +25,52 @@ const Content = () => {
     setError("");
     setOutputText("");
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_APP_GEMINI_API_ENDPOINT}?key=${import.meta.env.VITE_APP_GEMINI_API_KEY}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: `${prompt}\n${inputText}`
+    let apiKeyExhausted = true;
+    let attempts = 0;
+
+    while (apiKeyExhausted && attempts < API_KEYS.length) {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_APP_GEMINI_API_ENDPOINT}?key=${API_KEYS[currentKeyIndex]}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: `${prompt}\n${inputText}`
+              }]
             }]
-          }]
-        }),
-      });
+          }),
+        });
 
-      if (!response.ok) {
-        setError("Failed to generate text, please try again.");
-        throw new Error(`HTTP error! status: ${response.status}`);
+        if (response.status === 403) {
+          setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % API_KEYS.length);
+          attempts++;
+        } else if (!response.ok) {
+          setError("Failed to generate text, please try again.");
+          throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+          apiKeyExhausted = false;
+          const data = await response.json();
+          if (data.candidates && data.candidates.length > 0) {
+            setOutputText(data.candidates[0].content.parts.map(part => part.text).join(''));
+          } else {
+            setError("No text was generated.");
+          }
+        }
+      } catch (err) {
+        setError(`Error: ${err.message}`);
+        console.error("Error:", err);
+        apiKeyExhausted = false; // Exit the loop on non-quota errors
       }
-
-      const data = await response.json();
-      if (data.candidates && data.candidates.length > 0) {
-        setOutputText(data.candidates[0].content.parts.map(part => part.text).join(''));
-      } else {
-        setError("No text was generated.");
-      }
-    } catch (err) {
-      setError(`Error: ${err.message}`);
-      console.error("Error:", err);
-    } finally {
-      setIsLoading(false);
     }
+
+    if (attempts === API_KEYS.length) {
+      setError("All API keys have been exhausted. Please try again later.");
+    }
+
+    setIsLoading(false);
   }
 
   const formatText = (text) => {
