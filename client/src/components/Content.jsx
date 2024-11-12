@@ -52,6 +52,11 @@ const Content = () => {
     }
   }
 
+  const formatText = (text) => {
+    text = text.replace(/<\/?i>/g, '');
+    return text.replace(/\*\*/g, '');
+  };
+
   return (
     <section className="flex flex-col gap-4 mt-6 px-3 md:px-0">
       <div className="flex justify-center">
@@ -78,14 +83,7 @@ const Content = () => {
           </h1>
         </div>
       )}
-      {outputText && (
-        <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-medium">Text Generated 👇</h2>
-          <div className="w-full min-h-[50px] bg-zinc-800 p-3 rounded-md focus:outline-none resize-y">
-            {outputText}
-          </div>
-        </div>
-      )}
+      {outputText && formatText(outputText)}
     </section>
   )
 }
