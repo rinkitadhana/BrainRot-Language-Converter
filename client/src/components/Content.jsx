@@ -6,8 +6,7 @@ const Content = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const prompt =
-    "Take the following text and transform it into Gen Z language, incorporating popular slang, abbreviations, and trendy phrases. Use emojis where appropriate, keep the tone casual, and make it sound like something a Gen Z person would say in a text or social media post."
-  ;("[INST] Convert the following text into Gen Z language, using slang, abbreviations, and a casual tone. Only return the converted text without any additional text or explanations:")
+    "Take this input text and transform it into peak Gen Z brain rot language. Use a mix of trending slang, chaotic internet culture references, and absurd humor. Incorporate words like sigma, Ohio, skibidi, rizz, sus, NPC, and giga chad. Add random Gen Z humor like ratio and meme catchphrases to make the output feel like it was straight from a chaotic TikTok comment section. Maintain the general meaning of the original text but deliver it with maximum absurdity."
   const HF_TOKEN = "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"
 
   const handleGenerate = async () => {
@@ -22,7 +21,7 @@ const Content = () => {
 
     try {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/microsoft/phi-2",
+        "https://api-inference.huggingface.co/models/prometheus-eval/prometheus-13b-v1.0",
         {
           method: "POST",
           headers: {
@@ -60,7 +59,7 @@ const Content = () => {
         <textarea
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          className=" bg-zinc-800 text-lg h-[200px] w-full border-2 border-pur  rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon resize-y"
+          className=" bg-zinc-800 text-lg h-[120px] w-full border-2 border-pur  rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-neon resize-y"
           placeholder="Enter text here..."
         ></textarea>
       </div>
