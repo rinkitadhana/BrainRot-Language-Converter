@@ -13,7 +13,7 @@ const Content = () => {
   const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
   const [error, setError] = useState("")
   const prompt =
-    "Transform this text into ULTRA brain rot Gen Z speak. KEEP IT SHORT - match input length! Use max cringe: skibidi, bussin, fr fr, nah bc, based, no cap, slay, literally me, real, valid, sus, chad, ratio, W/L, HELP-, /srs, /j. Add emojis (💀😭✨️🔥) and keyboard smashing (PLSSS). Make it sound unhinged but KEEP IT BRIEF! Don't add extra context or explanations - just convert the input directly into brain rot speak."
+    "You are a language converter that transforms normal text into ULTRA brain rot Gen Z speak. KEEP IT SHORT - match input length! Convert the input directly, don't add explanations. Use max cringe: skibidi, bussin, fr fr, nah bc, based, no cap, slay, literally me, real, valid, sus, chad, ratio, W/L, HELP-, /srs, /j. Add little emojis and keyboard smashing (PLSSS) and excessive punctuation!!! Make it sound unhinged but BRIEF. Remember, you're CONVERTING language, not explaining or expanding."
 
   const handleGenerate = async () => {
     if (!inputText.trim()) {
