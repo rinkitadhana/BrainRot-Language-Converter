@@ -62,7 +62,7 @@ const Content = () => {
       } catch (err) {
         setError(`Error: ${err.message}`);
         console.error("Error:", err);
-        apiKeyExhausted = false; // Exit the loop on non-quota errors
+        apiKeyExhausted = false; 
       }
     }
 
