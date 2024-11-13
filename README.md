@@ -64,8 +64,9 @@ Transform your text into trendy Gen Z language with just a click. Our converter 
 ###  Screenshots
 
 <div align="center"> 
-  <img src="https://github.com/user-attachments/assets/fb1ec5c0-f5ea-44e0-be85-8ea0b3db38bb" alt="screenshot" />
+  <img src="https://github.com/user-attachments/assets/8b068f29-6eab-47d0-9af8-0afcc4cf490a" alt="screenshot" />
 </div>
+
 
 
 <!-- TechStack -->
@@ -75,17 +76,18 @@ Transform your text into trendy Gen Z language with just a click. Our converter 
   <summary>Client</summary>
   <ul>
         <li><a href="">React.js</a></li>
-        <li><a href="">Typescript</a></li>
+        <li><a href="">Javascript</a></li>
         <li><a href="">TailwindCSS</a></li>
+        <li><a href="">Gemini Api</a></li>
   </ul>
 </details>
 
 <!-- Features -->
 ### Features
 
-- Newspaper UI
-- Clean Animation
-- Shows crimes in a newspaper UI
+- It generates your normal text to Brain rot (Gen Z) Language
+- Easy to use UI and fun Project
+- Skibidi Ohio
 
 
 <!-- Getting Started -->
@@ -103,7 +105,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd my-project/client
 ```
 
 Install dependencies
