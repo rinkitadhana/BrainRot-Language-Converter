@@ -7,7 +7,7 @@ const Footer = () => {
         <div className=" flex flex-col justify-center items-center  font-semibold">
           <h1>Thanks for visiting!</h1>
           <h1>
-            <span className=" text-neon">Gruz & Arnab</span> made this
+            <span className=" text-neon">Rinkit & Arnab</span> made this
           </h1>
         </div>
 
