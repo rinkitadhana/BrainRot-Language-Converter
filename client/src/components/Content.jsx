@@ -19,7 +19,6 @@ const Content = () => {
     if (!inputText.trim()) {
       return setError("Please provide some text to convert.")
     }
-
     setIsLoading(true)
     setError("")
     setOutputText("")
@@ -117,7 +116,7 @@ const Content = () => {
       {outputText && (
         <div className="flex flex-col gap-4">
           <h2 className="text-xl font-medium">Text Generated 👇</h2>
-          <div className="w-full min-h-[50px] bg-zinc-800 p-3 rounded-md border-2 border-pur">
+          <div className="w-full min-h-[50px] bg-zinc-800 p-3 rounded-md border-2 border-pur overflow-auto">
             {formatText(outputText)}
           </div>
         </div>

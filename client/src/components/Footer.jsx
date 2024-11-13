@@ -14,7 +14,7 @@ const Footer = () => {
         <a
           href="https://x.com/damnGruz"
           target="_blank"
-          className=" flex gap-1.5 w-fit items-center border font-semibold rounded-full px-3 py-1 hover:bg-white hover:text-black transition-all"
+          className=" flex gap-1.5 w-fit items-center border font-semibold rounded-full px-3 py-1 hover:bg-white hover:text-black transition-all animate-pulse hover:animate-none"
         >
           <FaXTwitter /> Follow Me
         </a>
