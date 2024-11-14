@@ -120,7 +120,7 @@ Start the server
   npm run dev
 ```
 
-
+you also have to add your own api keys from gemini and make a .env file in the client folder
 
 <!-- Contributing -->
 ## Contributing
