@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { TbFidgetSpinner } from "react-icons/tb"
 
 const Content = () => {
   const [inputText, setInputText] = useState("")
@@ -69,7 +70,7 @@ const Content = () => {
           }
         }
       } catch (err) {
-        setError(`Error: ${err.message}`)
+        setError("something went wrong!")
         console.error("Error:", err)
         apiKeyExhausted = false
       }
@@ -101,9 +102,16 @@ const Content = () => {
         <button
           disabled={isLoading}
           onClick={handleGenerate}
-          className="text-neon cursor-pointer text-lg font-semibold border-2 py-2 px-3 rounded-full border-pur hover:bg-pur transition-all"
+          className="text-neon cursor-pointer text-lg font-semibold border-2 py-2 px-4 rounded-full border-pur hover:bg-pur transition-all"
         >
-          {isLoading ? "Generating..." : "Generate✨"}
+          {isLoading ? (
+            <div className="flex items-center gap-1.5">
+              <TbFidgetSpinner className="animate-spin" />
+              Generating
+            </div>
+          ) : (
+            "Generate✨"
+          )}
         </button>
       </div>
       {error && (
